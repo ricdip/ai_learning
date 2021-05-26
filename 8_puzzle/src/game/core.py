@@ -2,6 +2,7 @@ import random
 from .display import Display
 import time
 
+# game
 class Game:
     def __init__(self):
         self.grid = _Grid()
@@ -17,6 +18,7 @@ class Game:
             time.sleep(1)
 
 
+# representation
 class _Grid:
     def __init__(self):
         self.rows = 3

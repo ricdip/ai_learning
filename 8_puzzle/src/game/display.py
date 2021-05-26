@@ -25,13 +25,11 @@ class Display:
             self.__scr.addstr("\n")
         self.__scr.addstr("\n")
 
-
     def __sig_handler(self, signal, frame):
         self.__exit()
-
 
     def __exit(self):
         curses.echo()
         curses.nocbreak()
         curses.endwin()
-        sys,exit(0)
+        sys.exit(0)

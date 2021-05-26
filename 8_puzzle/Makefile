@@ -23,16 +23,16 @@ init:
 	$(PYTHON) -m pip install --upgrade pip
 
 .ONESHELL:
-install:
+install: venv
 	. venv/bin/activate
 	$(PIP) install -r requirements.txt
 
 .ONESHELL:
-run:
+run: venv
 	. venv/bin/activate
 	$(PYTHON) src/main.py
 
-clean:
+clean: venv
 	rm -rf venv
 
 .PHONY: help build init install run clean
