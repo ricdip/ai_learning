@@ -2,13 +2,15 @@ import random
 from .display import Display
 from .ai import AI
 import copy
+import time
 
 # game
 class Game:
-    def __init__(self, random_grid=False):
-        self.grid = _Grid(None, random_grid)
+    def __init__(self, random_grid=False, watch_moves=False):
+        self.grid = _Grid(grid=None, random_grid=random_grid)
         self.display = Display()
         self.ai = AI()
+        self.watch_moves = watch_moves
 
     def start(self):
         self.__game_loop()
@@ -17,7 +19,7 @@ class Game:
         # victory state
         goal_state = [[1,2,3], [4,5,6], [7,8,'*']]
         # initial state
-        initial_state = GameState(None, self.grid, 0, 0)
+        initial_state = GameState(parent=None, representation=self.grid, level=0, fval=0)
 
         # draw initial state
         self.display.draw_state(initial_state, 0)
@@ -29,6 +31,8 @@ class Game:
         # list solution and some infos
         moves = 0
         for node in solutionPath:
+            if self.watch_moves:
+                time.sleep(1)
             self.display.draw_state(node, moves)
             moves += 1
 
@@ -37,7 +41,7 @@ class Game:
 
 # single game state
 class GameState:
-    def __init__(self, parent, representation, level, fval):
+    def __init__(self, parent=None, representation=None, level=0, fval=0):
         self.parent = parent
         self.representation = representation
         self.level = level
@@ -58,7 +62,7 @@ class GameState:
         for move in move_results:
             if move is not None:
                 # create a child node for each valid move
-                children.append(GameState(self, _Grid(move, False), self.level+1, 0))
+                children.append(GameState(parent=self, representation=_Grid(grid=move), level=self.level+1, fval=0))
         return children
 
 
