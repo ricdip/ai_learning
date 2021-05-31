@@ -7,10 +7,10 @@ class AI:
     # A* algorithm possible implementation
     # TODO: is this correct ?
     def search(self, initial_state, goal_state):
-        fringe = []
-        explored = []
+        fringe = set([])
+        explored = set([])
         initial_state.fval = self.f(initial_state, goal_state)
-        fringe.append(initial_state)
+        fringe.add(initial_state)
 
         iterations = 0
         cur_state = initial_state
@@ -24,15 +24,13 @@ class AI:
             if self.h(cur_state, goal_state) == 0:
                 break
 
-            neighbors = []
+            neighbors = set([])
             for child in cur_state.generate_children():
                 child.fval = self.f(child, goal_state)
-                neighbors.append(child)
+                neighbors.add(child)
 
-            explored.append(cur_state)
-            #fringe = (fringe | neighbors) - explored
-            fringe += neighbors
-            fringe = [item for item in fringe if item not in explored]
+            explored.add(cur_state)
+            fringe = (fringe | neighbors) - explored
 
         return self.backpath(cur_state),iterations
 
