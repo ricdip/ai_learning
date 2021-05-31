@@ -5,8 +5,8 @@ import copy
 
 # game
 class Game:
-    def __init__(self):
-        self.grid = _Grid()
+    def __init__(self, random_grid=False):
+        self.grid = _Grid(None, random_grid)
         self.display = Display()
         self.ai = AI()
 
@@ -20,7 +20,7 @@ class Game:
         initial_state = GameState(None, self.grid, 0, 0)
 
         # draw initial state
-        self.display.draw_grid(initial_state.representation.grid, 0)
+        self.display.draw_state(initial_state, 0)
 
         # calculate solution
         solutionPath, iterations = self.ai.search(initial_state, goal_state)
@@ -29,7 +29,7 @@ class Game:
         # list solution and some infos
         moves = 0
         for node in solutionPath:
-            self.display.draw_grid(node.representation.grid, moves)
+            self.display.draw_state(node, moves)
             moves += 1
 
         self.display.print_infos({'Total iterations': iterations, 'Total moves': moves})
@@ -58,22 +58,24 @@ class GameState:
         for move in move_results:
             if move is not None:
                 # create a child node for each valid move
-                children.append(GameState(self, _Grid(move), self.level+1, 0))
+                children.append(GameState(self, _Grid(move, False), self.level+1, 0))
         return children
 
 
 # 8-puzzle representation
 class _Grid:
-    def __init__(self, grid=None):
+    def __init__(self, grid=None, random_grid=False):
         self.rows = 3
         self.cols = 3
         if grid is not None:
             self.grid = grid
         else:
             self.grid = []
-            #self.__init_grid()
-            #self.__shuffle_grid()
-            self.__init_grid_fixed()
+            if random_grid:
+                self.__init_grid()
+                self.__shuffle_grid()
+            else:
+                self.__init_grid_fixed()
 
     def __eq__(self, other):
         if not isinstance(other, _Grid):

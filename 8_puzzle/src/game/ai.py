@@ -21,7 +21,7 @@ class AI:
 
             cur_state = min(fringe, key=lambda x:x.fval)
             
-            if self.h(cur_state.representation.grid, goal_state) == 0:
+            if self.h(cur_state, goal_state) == 0:
                 break
 
             neighbors = []
@@ -39,7 +39,7 @@ class AI:
     # f(x)
     def f(self, start, goal):
         g_x = start.level
-        h_x = self.h(start.representation.grid, goal)
+        h_x = self.h(start, goal)
         ## TODO: why with g(x) + h(x) we don't terminate ?
         #f_x = g_x + h_x
         f_x = h_x
@@ -50,7 +50,7 @@ class AI:
         difference = 0
         for i in range(0, 3):
             for j in range(0, 3):
-                if start[i][j] != goal[i][j] and start[i][j] != '*':
+                if start.representation.grid[i][j] != goal[i][j] and start.representation.grid[i][j] != '*':
                     difference += 1
         return difference
 
