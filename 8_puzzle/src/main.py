@@ -1,7 +1,7 @@
 from game import Game
 
 def main():
-    g = Game(random_grid=False, watch_moves=False)
+    g = Game(random_grid=False, watch_moves=False, output=True)
     g.start()
 
 

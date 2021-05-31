@@ -1,8 +1,6 @@
-from .display import Display
-
 class AI:
-    def __init__(self):
-        self.display = Display()
+    def __init__(self, display):
+        self.display = display
 
     # A* algorithm possible implementation
     # TODO: is this correct ?

@@ -2,19 +2,22 @@ import signal
 import sys
 
 class Display:
-    def __init__(self):
+    def __init__(self, output=True):
+        self.output = output
         signal.signal(signal.SIGINT, self.__sig_handler)
 
     def draw_state(self, state, move_number):
-        print(" - MOVE {}\n\n".format(move_number))
-        for row in state.representation.grid:
-            for col in row:
-                print(" {} ".format(col), end='')
+        if self.output:
+            print(" - MOVE {}\n\n".format(move_number))
+            for row in state.representation.grid:
+                for col in row:
+                    print(" {} ".format(col), end='')
+                print("\n")
             print("\n")
-        print("\n")
 
     def print_status(self, iterations):
-        print(" - Iterations: {}".format(iterations), end='\r')
+        if self.output:
+            print(" - Iterations: {}".format(iterations), end='\r')
 
     def print_success(self):
         print("\n")

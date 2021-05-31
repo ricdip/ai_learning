@@ -6,10 +6,10 @@ import time
 
 # game
 class Game:
-    def __init__(self, random_grid=False, watch_moves=False):
+    def __init__(self, random_grid=False, watch_moves=False, output=True):
         self.grid = _Grid(grid=None, random_grid=random_grid)
-        self.display = Display()
-        self.ai = AI()
+        self.display = Display(output)
+        self.ai = AI(self.display)
         self.watch_moves = watch_moves
 
     def start(self):
