@@ -53,9 +53,11 @@ class GameState:
 
     def generate_children(self):
         children = []
+        # simulate valid moves (if valid -> grid with move's result, else None)
         move_results = [self.representation.move_up_sim(), self.representation.move_down_sim(), self.representation.move_left_sim(), self.representation.move_right_sim()]
         for move in move_results:
             if move is not None:
+                # create a child node for each valid move
                 children.append(GameState(self, _Grid(move), self.level+1, 0))
         return children
 
