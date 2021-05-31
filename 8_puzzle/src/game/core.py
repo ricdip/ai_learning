@@ -65,7 +65,7 @@ class GameState:
         for move in move_results:
             if move is not None:
                 # create a child node for each valid move
-                children.append(GameState(parent=self, representation=_Grid(grid=move), level=self.level+1, fval=0))
+                children.append(GameState(parent=self, representation=_Grid(grid=move), level=self.level + 1, fval=0))
         return children
 
 

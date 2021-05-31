@@ -26,11 +26,19 @@ class AI:
 
             neighbors = set([])
             for child in cur_state.generate_children():
+                if child in explored:
+                    continue
                 child.fval = self.f(child, goal_state)
+                if child in fringe:
+                    fringe_list = list(fringe)
+                    child_in_fringe = fringe_list[fringe_list.index(child)]
+                    if child.fval > child_in_fringe.fval:
+                        continue
                 neighbors.add(child)
 
             explored.add(cur_state)
-            fringe = (fringe | neighbors) - explored
+            #fringe = (fringe | neighbors) - explored
+            fringe = (fringe.union(neighbors)).difference(explored)
 
         return self.backpath(cur_state),iterations
 
