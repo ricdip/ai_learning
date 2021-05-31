@@ -1,35 +1,32 @@
-import curses
 import signal
 import sys
 
 class Display:
     def __init__(self):
-        self.__scr = curses.initscr()
-        curses.noecho()
-        curses.cbreak()
-        curses.start_color()
         signal.signal(signal.SIGINT, self.__sig_handler)
 
-    def redraw(self, grid):
-        self.__scr.clear()
-
-        self.__draw_grid(grid)
-
-        self.__scr.refresh()
-
-    def __draw_grid(self, grid):
-        self.__scr.addstr(" GRID\n\n")
+    def draw_grid(self, grid, move_number):
+        print(" MOVE {}\n\n".format(move_number))
         for row in grid:
             for col in row:
-                self.__scr.addstr(" {} ".format(col))
-            self.__scr.addstr("\n")
-        self.__scr.addstr("\n")
+                print(" {} ".format(col), end='')
+            print("\n")
+        print("\n")
+
+    def print_status(self, iterations):
+        print(" Iterations: {}".format(iterations), end='\r')
+
+    def print_success(self):
+        print("")
+        print(" SOLUTION FOUND\n")
+
+    def print_infos(self, infos):
+        for k in infos.keys():
+            print("{}: {}".format(k, infos[k]))
 
     def __sig_handler(self, signal, frame):
         self.__exit()
 
     def __exit(self):
-        curses.echo()
-        curses.nocbreak()
-        curses.endwin()
+        print("Exiting")
         sys.exit(0)

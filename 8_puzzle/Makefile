@@ -28,6 +28,7 @@ install: venv
 	$(PIP) install -r requirements.txt
 
 .ONESHELL:
+.SILENT: run
 run: venv
 	. venv/bin/activate
 	$(PYTHON) src/main.py
