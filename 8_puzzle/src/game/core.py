@@ -55,6 +55,7 @@ class GameState:
     def __ne__(self, other):
         return not self.__eq__(other)
 
+    # because of sets
     def __hash__(self):
         return hash(self.representation)
 
@@ -82,7 +83,7 @@ class _Grid:
                 self.__init_grid()
                 self.__shuffle_grid()
             else:
-                self.__init_grid_fixed()
+                self.__init_fixed_grid()
 
     def __eq__(self, other):
         if not isinstance(other, _Grid):
@@ -92,6 +93,7 @@ class _Grid:
     def __ne__(self, other):
         return not self.__eq__(other)
 
+    # because of sets
     def __hash__(self):
         linear_array = self.grid[0] + self.grid[1] + self.grid[2]
         return hash(tuple(linear_array))
@@ -148,6 +150,7 @@ class _Grid:
                 if self.grid[x][y] == '*':
                     return (x, y)
     
+    # we shuffle the grid until we have a solvable 8 puzzle
     def __shuffle_grid(self):
         for row in self.grid:
             random.shuffle(row)
@@ -157,6 +160,7 @@ class _Grid:
                 random.shuffle(row)
             random.shuffle(self.grid)
 
+    # True if 8 puzzle is solvable
     def __solvable(self, grid):
         linear_grid = grid[0] + grid[1] + grid[2]
         linear_grid.remove('*')
@@ -170,7 +174,8 @@ class _Grid:
 
         return (invertions % 2) == 0
 
-    def __init_grid_fixed(self):
+    # fixed 8 puzzle instance
+    def __init_fixed_grid(self):
         self.grid = [[8, '*', 6], [5, 4, 7], [2, 3, 1]]
 
     def __init_grid(self):

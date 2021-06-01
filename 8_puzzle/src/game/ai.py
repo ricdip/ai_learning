@@ -3,7 +3,7 @@ class AI:
         self.display = display
 
     # A* algorithm possible implementation
-    # TODO: is this correct ?
+    # TODO: is this really correct ?
     def search(self, initial_state, goal_state):
         fringe = set([])
         explored = set([])
@@ -40,7 +40,7 @@ class AI:
 
         return self.backpath(cur_state),iterations
 
-    # f(x)
+    # f(x) = g(x) + h(x)
     def f(self, start, goal):
         g_x = start.level
         h_x = self.h(start, goal)

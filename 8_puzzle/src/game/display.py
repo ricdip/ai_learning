@@ -20,17 +20,20 @@ class Display:
             print(" - Iterations: {}".format(iterations), end='\r')
 
     def print_success(self):
-        print("\n")
-        print(" SOLUTION FOUND\n")
+        if self.output:
+            print("\n")
+            print(" SOLUTION FOUND\n")
 
     def print_infos(self, infos):
-        for k in infos.keys():
-            print("- {}: {}".format(k, infos[k]))
+        if self.output:
+            for k in infos.keys():
+                print("- {}: {}".format(k, infos[k]))
 
     def __sig_handler(self, signal, frame):
         self.__exit()
 
     def __exit(self):
-        print("")
-        print("Exiting")
+        if self.output:
+            print("")
+            print("Exiting")
         sys.exit(0)
