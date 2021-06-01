@@ -1,8 +1,10 @@
 import random
-from .display import Display
-from .ai import AI
 import copy
 import time
+
+from .display import Display
+from .ai import AI
+
 
 # game
 class Game:
@@ -61,7 +63,7 @@ class GameState:
 
     def generate_children(self):
         children = []
-        # simulate valid moves (if valid -> grid with move's result, else None)
+        # simulate all possible moves (if valid move -> grid with move's result, else None)
         move_results = [self.representation.move_up_sim(), self.representation.move_down_sim(), self.representation.move_left_sim(), self.representation.move_right_sim()]
         for move in move_results:
             if move is not None:

@@ -11,7 +11,7 @@ class AI:
         fringe.add(initial_state)
 
         iterations = 0
-        cur_state = initial_state
+        cur_state = None
         while len(fringe) > 0:
             iterations += 1
             
@@ -47,9 +47,11 @@ class AI:
         ## TODO: why with g(x) + h(x) we don't terminate ?
         #f_x = g_x + h_x
         f_x = h_x
+        #print("f: {}, g: {}, h:{}".format(f_x, g_x, h_x))
         return f_x
     
     # h(x): heuristic function -> for 8 puzzle, the number of misplaced tiles
+    # not the best possibile heuristic but this is a simple one (a better heuristic is the Manhattan distance)
     def h(self, start, goal):
         difference = 0
         for i in range(0, 3):

@@ -1,6 +1,7 @@
 import signal
 import sys
 
+
 class Display:
     def __init__(self, output=True):
         self.output = output
