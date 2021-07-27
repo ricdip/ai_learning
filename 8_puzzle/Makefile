@@ -13,8 +13,11 @@ help:
 	@printf "%s \\t %s\n" "install" "install requirements"
 	@printf "%s \\t\\t %s\n" "run" "run game"
 	@printf "%s \\t\\t %s\n" "clean" "clean venv files"
+	@printf "%s \\t\\t %s\n" "all" "build and run game"
 
 build: init install
+
+all: build run
 
 .ONESHELL:
 init:
@@ -36,4 +39,4 @@ run: venv
 clean: venv
 	rm -rf venv
 
-.PHONY: help build init install run clean
+.PHONY: help build all init install run clean
