@@ -1,5 +1,6 @@
 import numpy as np
 from colorama import Fore, Style
+from .blocks import Block_1
 
 
 class Representation:
@@ -8,17 +9,27 @@ class Representation:
 
 
 class PianoMoverRepresentation(Representation):
-    def __init__(self, dim=(10, 10), grid=None, blocks=None):
-        if grid is None:
-            self.grid = np.zeros(shape=dim, dtype=int)
-            self.blocks = self.__generate_blocks()
+    def __init__(self, dim=(10, 10), blocks=None):
+        self.dim = dim
+        self.grid = np.zeros(shape=dim, dtype=int)
+
+        if blocks is None:
+            self.blocks = {}
+            self.__generate_blocks()
         else:
-            self.grid = grid
             self.blocks = blocks
 
     # random block generation
     def __generate_blocks(self):
-        return {}
+        self.blocks[0] = Block_1(self)
+        self.update_grid()
+
+    def update_grid(self):
+        self.grid = np.zeros(shape=self.dim, dtype=int)
+        for k in self.blocks:
+            block = self.blocks[k]
+            for block_coordinates in block.pos:
+                self.grid[block_coordinates[0], block_coordinates[1]] = block.value
 
     # get grid shape: (x, y)
     def get_grid_shape(self):
