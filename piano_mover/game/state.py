@@ -4,5 +4,5 @@ class State:
     ):
         pass
 
-    def isVictory(self):
+    def is_victory(self):
         return False

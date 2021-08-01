@@ -1,5 +1,9 @@
+from game import PianoMoverRepresentation
+
+
 def main():
-    print("Hello World!")
+    r = PianoMoverRepresentation()
+    r.print_grid()
 
 
 if __name__ == "__main__":
