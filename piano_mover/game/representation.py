@@ -1,6 +1,6 @@
 import numpy as np
 from colorama import Fore, Style
-from .blocks import Block_1
+from .blocks import Block_1, Block_2, Block_3, Piano, Exit
 
 
 class Representation:
@@ -18,10 +18,31 @@ class PianoMoverRepresentation(Representation):
             self.__generate_blocks()
         else:
             self.blocks = blocks
+            self.update_grid()
 
     # random block generation
     def __generate_blocks(self):
-        self.blocks[0] = Block_1(self)
+        self.blocks[0] = Piano(self)
+        self.update_grid()
+        self.blocks[1] = Exit(self, self.blocks[0])
+        self.update_grid()
+        self.blocks[2] = Block_3(self)
+        self.update_grid()
+        self.blocks[3] = Block_3(self)
+        self.update_grid()
+        self.blocks[4] = Block_3(self)
+        self.update_grid()
+        self.blocks[5] = Block_3(self)
+        self.update_grid()
+        self.blocks[6] = Block_3(self)
+        self.update_grid()
+        self.blocks[7] = Block_3(self)
+        self.update_grid()
+        self.blocks[8] = Block_2(self)
+        self.update_grid()
+        self.blocks[9] = Block_2(self)
+        self.update_grid()
+        self.blocks[10] = Block_1(self)
         self.update_grid()
 
     def update_grid(self):
