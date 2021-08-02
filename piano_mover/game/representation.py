@@ -45,7 +45,7 @@ class PianoMoverRepresentation(Representation):
         self.blocks["1_1"] = Block_1("1_1", self)
         self.update_grid()
 
-    def update_block(block):
+    def update_block(self, block):
         self.blocks[block.id] = block
         self.update_grid()
 

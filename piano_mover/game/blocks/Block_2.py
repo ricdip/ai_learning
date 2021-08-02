@@ -45,6 +45,3 @@ class Block_2:
         self.pos = []
         self.pos.append((self.head_x, self.head_y))
         self.pos.append((self.body_x, self.body_y))
-
-    def __update_repr(self):
-        self.repr.update_grid()
