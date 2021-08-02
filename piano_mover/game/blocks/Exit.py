@@ -5,7 +5,7 @@ class Exit:
     def __init__(self, representation=None, piano_block=None):
         self.repr = representation
         self.pos = []
-        self.value = 5
+        self.value = 0
         self.piano_block = piano_block
         self.head_x = None
         self.head_y = None

@@ -1,5 +1,5 @@
 import numpy as np
-from colorama import Fore, Style
+from colorama import Fore, Back, Style
 from .blocks import Block_1, Block_2, Block_3, Piano, Exit
 
 
@@ -22,27 +22,27 @@ class PianoMoverRepresentation(Representation):
 
     # random block generation
     def __generate_blocks(self):
-        self.blocks[0] = Piano(self)
+        self.blocks["piano"] = Piano(self)
         self.update_grid()
-        self.blocks[1] = Exit(self, self.blocks[0])
+        self.blocks["exit"] = Exit(self, self.blocks["piano"])
         self.update_grid()
-        self.blocks[2] = Block_3(self)
+        self.blocks["3_1"] = Block_3(self)
         self.update_grid()
-        self.blocks[3] = Block_3(self)
+        self.blocks["3_2"] = Block_3(self)
         self.update_grid()
-        self.blocks[4] = Block_3(self)
+        self.blocks["3_3"] = Block_3(self)
         self.update_grid()
-        self.blocks[5] = Block_3(self)
+        self.blocks["3_4"] = Block_3(self)
         self.update_grid()
-        self.blocks[6] = Block_3(self)
+        self.blocks["3_5"] = Block_3(self)
         self.update_grid()
-        self.blocks[7] = Block_3(self)
+        self.blocks["3_6"] = Block_3(self)
         self.update_grid()
-        self.blocks[8] = Block_2(self)
+        self.blocks["2_1"] = Block_2(self)
         self.update_grid()
-        self.blocks[9] = Block_2(self)
+        self.blocks["2_2"] = Block_2(self)
         self.update_grid()
-        self.blocks[10] = Block_1(self)
+        self.blocks["1_1"] = Block_1(self)
         self.update_grid()
 
     def update_grid(self):
@@ -58,9 +58,18 @@ class PianoMoverRepresentation(Representation):
 
     # print colored grid
     def print_grid(self):
+        exit_block = self.blocks.get("exit")
+
         for i in range(self.get_grid_shape()[0]):
             for j in range(self.get_grid_shape()[1]):
-                if self.grid[i, j] == 0:
+                exit_block_cell = (exit_block is not None) and (
+                    (i == exit_block.head_x and j == exit_block.head_y)
+                    or (i == exit_block.body_1_x and j == exit_block.body_1_y)
+                    or (i == exit_block.body_2_x and j == exit_block.body_2_y)
+                    or (i == exit_block.body_3_x and j == exit_block.body_3_y)
+                )
+
+                if self.grid[i, j] == 0 and not exit_block_cell:
                     # empty cell
                     print(
                         " {}{}{} ".format(Fore.BLUE, self.grid[i, j], Style.RESET_ALL),
@@ -82,10 +91,10 @@ class PianoMoverRepresentation(Representation):
                         ),
                         end="",
                     )
-                elif self.grid[i, j] == 5:
+                elif exit_block_cell:
                     # exit's cell
                     print(
-                        " {}{}{} ".format(Fore.GREEN, self.grid[i, j], Style.RESET_ALL),
+                        "{} {} {}".format(Back.GREEN, self.grid[i, j], Style.RESET_ALL),
                         end="",
                     )
             print()
