@@ -80,8 +80,17 @@ class Block_1:
                 or pos[0] > self.repr.get_grid_shape()[0] - 1
                 or pos[1] < 0
                 or pos[1] > self.repr.get_grid_shape()[1] - 1
-                or self.repr.grid[pos[0], pos[1]] != 0
+                or self.__block_collision(new_pos)
             ):
                 return True
+
+        return False
+
+    def __block_collision(self, new_pos):
+        for k in self.repr.blocks:
+            if self.repr.blocks[k].id != "exit" and self.repr.blocks[k].id != self.id:
+                for pos in self.repr.blocks[k].pos:
+                    if pos in new_pos:
+                        return True
 
         return False
