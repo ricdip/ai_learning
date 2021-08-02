@@ -22,27 +22,31 @@ class PianoMoverRepresentation(Representation):
 
     # random block generation
     def __generate_blocks(self):
-        self.blocks["piano"] = Piano(self)
+        self.blocks["piano"] = Piano("piano", self)
         self.update_grid()
-        self.blocks["exit"] = Exit(self, self.blocks["piano"])
+        self.blocks["exit"] = Exit("exit", self, self.blocks["piano"])
         self.update_grid()
-        self.blocks["3_1"] = Block_3(self)
+        self.blocks["3_1"] = Block_3("3_1", self)
         self.update_grid()
-        self.blocks["3_2"] = Block_3(self)
+        self.blocks["3_2"] = Block_3("3_2", self)
         self.update_grid()
-        self.blocks["3_3"] = Block_3(self)
+        self.blocks["3_3"] = Block_3("3_3", self)
         self.update_grid()
-        self.blocks["3_4"] = Block_3(self)
+        self.blocks["3_4"] = Block_3("3_4", self)
         self.update_grid()
-        self.blocks["3_5"] = Block_3(self)
+        self.blocks["3_5"] = Block_3("3_5", self)
         self.update_grid()
-        self.blocks["3_6"] = Block_3(self)
+        self.blocks["3_6"] = Block_3("3_6", self)
         self.update_grid()
-        self.blocks["2_1"] = Block_2(self)
+        self.blocks["2_1"] = Block_2("2_1", self)
         self.update_grid()
-        self.blocks["2_2"] = Block_2(self)
+        self.blocks["2_2"] = Block_2("2_2", self)
         self.update_grid()
-        self.blocks["1_1"] = Block_1(self)
+        self.blocks["1_1"] = Block_1("1_1", self)
+        self.update_grid()
+
+    def update_block(block):
+        self.blocks[block.id] = block
         self.update_grid()
 
     def update_grid(self):

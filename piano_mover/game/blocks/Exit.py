@@ -2,7 +2,8 @@ import random
 
 #  exit
 class Exit:
-    def __init__(self, representation=None, piano_block=None):
+    def __init__(self, id=None, representation=None, piano_block=None):
+        self.id = id
         self.repr = representation
         self.pos = []
         self.value = 0

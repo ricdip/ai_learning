@@ -2,7 +2,8 @@ import random
 
 # 2 obstacles
 class Block_2:
-    def __init__(self, representation=None):
+    def __init__(self, id=None, representation=None):
+        self.id = id
         self.repr = representation
         self.pos = []
         self.value = 2
