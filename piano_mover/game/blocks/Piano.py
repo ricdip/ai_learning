@@ -13,14 +13,14 @@ class Piano:
             self.__generate_positions()
         else:
             self.pos = pos
-            self.head_x = None
-            self.head_y = None
-            self.body_1_x = None
-            self.body_1_y = None
-            self.body_2_x = None
-            self.body_2_y = None
-            self.body_3_x = None
-            self.body_3_y = None
+            self.head_x = pos[0][0]
+            self.head_y = pos[0][1]
+            self.body_1_x = pos[1][0]
+            self.body_1_y = pos[1][1]
+            self.body_2_x = pos[2][0]
+            self.body_2_y = pos[2][1]
+            self.body_3_x = pos[3][0]
+            self.body_3_y = pos[3][1]
 
         self.value = 4
 

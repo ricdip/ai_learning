@@ -20,6 +20,17 @@ class PianoMoverRepresentation(Representation):
             self.blocks = blocks
             self.update_grid()
 
+    def __eq__(self, other):
+        if not isinstance(other, PianoMoverRepresentation):
+            return False
+        return np.array_equal(self.grid, other.grid)
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __hash__(self):
+        return hash(str(self.grid))
+
     # random block generation
     def __generate_blocks(self):
         self.blocks["piano"] = Piano("piano", self)
@@ -52,9 +63,10 @@ class PianoMoverRepresentation(Representation):
     def update_grid(self):
         self.grid = np.zeros(shape=self.dim, dtype=int)
         for k in self.blocks:
-            block = self.blocks[k]
-            for block_coordinates in block.pos:
-                self.grid[block_coordinates[0], block_coordinates[1]] = block.value
+            if k != "exit":
+                block = self.blocks[k]
+                for block_coordinates in block.pos:
+                    self.grid[block_coordinates[0], block_coordinates[1]] = block.value
 
     # get grid shape: (x, y)
     def get_grid_shape(self):
@@ -110,9 +122,9 @@ class PianoMoverRepresentation(Representation):
         if len(exit_block.pos) != len(piano_block.pos):
             return False
 
-        for exit_coord in exit_block.pos:
-            for piano_coord in piano_block.pos:
-                if exit_coord != piano_coord:
-                    return False
-
-        return True
+        return (
+            (piano_block.pos[0] == exit_block.pos[0])
+            and (piano_block.pos[1] == exit_block.pos[1])
+            and (piano_block.pos[2] == exit_block.pos[2])
+            and (piano_block.pos[3] == exit_block.pos[3])
+        )

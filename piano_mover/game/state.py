@@ -34,5 +34,22 @@ class PianoMoverState(State):
         self.h = None
         self.f = None
 
+    def __eq__(self, other):
+        if not isinstance(other, PianoMoverState):
+            return False
+        return self.representation == other.representation
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __hash__(self):
+        return self.representation.__hash__()
+
+    def print_state(self):
+        self.representation.print_grid()
+        print(" g(n): {}".format(self.g))
+        print(" h(n): {}".format(self.h))
+        print(" f(n): {}".format(self.f))
+
     def is_victory(self):
         return self.representation.is_victory()
