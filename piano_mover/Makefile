@@ -34,7 +34,7 @@ clean: venv
 .SILENT: run
 run: venv
 	. venv/bin/activate
-	$(PYTHON) main.py
+	$(PYTHON) src/main.py
 
 all: build run
 
