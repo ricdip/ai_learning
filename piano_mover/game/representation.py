@@ -102,3 +102,17 @@ class PianoMoverRepresentation(Representation):
                         end="",
                     )
             print()
+
+    def is_victory(self):
+        exit_block = self.blocks["exit"]
+        piano_block = self.blocks["piano"]
+
+        if len(exit_block.pos) != len(piano_block.pos):
+            return False
+
+        for exit_coord in exit_block.pos:
+            for piano_coord in piano_block.pos:
+                if exit_coord != piano_coord:
+                    return False
+
+        return True
