@@ -1,5 +1,5 @@
 from game import PianoMoverState
-from ai import ManhattanDistance, A_star
+from ai import ManhattanDistance, A_Star
 import sys
 
 
@@ -40,6 +40,8 @@ def run(heuristic=None, search_algorithm=None):
         sys.exit(1)
 
     print()
+    print()
+    print("Solution found")
     print()
     print("Path from initial state:")
     for node in path:

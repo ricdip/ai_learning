@@ -15,3 +15,10 @@ def print_state_online(state, fringe_len, explored_len):
         ),
         end="\r",
     )
+
+
+def get_state_from_set(set_of_states, state):
+    for node in set_of_states:
+        if node == state:
+            return node
+    return None

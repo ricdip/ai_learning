@@ -4,12 +4,14 @@ import piano_mover
 from ai import ManhattanDistance
 
 # search algorithms import
-from ai import A_star
+from ai import A_Star, BestFirst, Dijkstra
 
 
 def main():
     heuristic = ManhattanDistance
-    search_algorithm = A_star
+    search_algorithm = A_Star
+    # search_algorithm = BestFirst
+    # search_algorithm = Dijkstra
 
     piano_mover.run(heuristic=heuristic, search_algorithm=search_algorithm)
 

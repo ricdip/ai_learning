@@ -6,7 +6,6 @@ class State:
         self,
         parent=None,
         representation=None,
-        g=0,
     ):
         pass
 
@@ -19,7 +18,6 @@ class PianoMoverState(State):
         self,
         parent=None,
         representation=None,
-        g=0,
     ):
         self.parent = parent
 
@@ -30,7 +28,7 @@ class PianoMoverState(State):
             # we already have a representation, we assign it
             self.representation = representation
 
-        self.g = g
+        self.g = None
         self.h = None
         self.f = None
 
