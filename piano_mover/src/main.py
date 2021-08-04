@@ -1,31 +1,17 @@
-from game import PianoMoverState
-from ai import ManhattanDistance, A_star
-import sys
+import piano_mover
+
+# heuristics import
+from ai import ManhattanDistance
+
+# search algorithms import
+from ai import A_star
 
 
 def main():
-    heuristic = ManhattanDistance()
-    search = A_star(heuristic)
+    heuristic = ManhattanDistance
+    search_algorithm = A_star
 
-    initial_state = PianoMoverState()
-
-    print("Initial state grid:")
-    initial_state.representation.print_grid()
-
-    path = search.search(initial_state)
-
-    if path is None:
-        print("A* could not find the victory path.")
-        sys.exit(1)
-
-    print()
-    print("Path from initial state:")
-    for node in path:
-        node.print_state()
-        print("---------------------------------------")
-        print()
-
-    print("Victory state reached")
+    piano_mover.run(heuristic=heuristic, search_algorithm=search_algorithm)
 
 
 if __name__ == "__main__":

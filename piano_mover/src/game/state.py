@@ -51,5 +51,8 @@ class PianoMoverState(State):
         print(" h(n): {}".format(self.h))
         print(" f(n): {}".format(self.f))
 
+    def print_state_online(self):
+        print(" g(n): {}, h(n): {}, f(n): {}".format(self.g, self.h, self.f), end="\n")
+
     def is_victory(self):
         return self.representation.is_victory()

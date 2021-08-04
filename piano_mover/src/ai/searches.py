@@ -1,4 +1,4 @@
-from .utils import backpath
+from .utils import backpath, print_state_online
 import game
 
 
@@ -23,17 +23,24 @@ class A_star(SearchAlgorithm):
     # this is a possible implementation of the A* algorithm
     # return: path from init_state to victory_state
     def search(self, initial_state=None):
-        fringe = set([])
-        visited = set([])
+        # fringe = set([])
+        fringe = []
+        # visited = set([])
+        visited = []
 
-        fringe.add(initial_state)
+        # fringe.add(initial_state)
+        fringe.append(initial_state)
         while len(fringe) > 0:
             # get current node
-            curr_state = min(fringe, key=lambda state: state.f)
+            # curr_state = min(fringe, key=lambda state: state.f)
+            curr_state = fringe[0]
             # remove current node from fringe
-            fringe = fringe - set([curr_state])
+            # fringe = fringe - set([curr_state])
+            fringe.remove(curr_state)
+            # del fringe[0]
 
-            # curr_state.print_state()
+            # print current state status
+            print_state_online(curr_state, len(fringe), len(visited))
 
             # check if current node is goal
             if curr_state.is_victory():
@@ -51,22 +58,29 @@ class A_star(SearchAlgorithm):
 
                 # if child is already in fringe (state generated previously)
                 if child in fringe:
-                    fringe_list = list(fringe)
+                    # fringe_list = list(fringe)
                     # previous is the previous child's state,
                     # we want to check if now child is better
-                    previous = fringe_list[fringe_list.index(child)]
+                    # previous = fringe_list[fringe_list.index(child)]
+                    previous = fringe[fringe.index(child)]
                     # if previous state is better, continue
                     # else, substitute child's state
                     if previous.g <= child.g:
                         continue
                     else:
-                        fringe = fringe - set([previous])
-                        fringe.add(child)
+                        # fringe = fringe - set([previous])
+                        # fringe.add(child)
+                        fringe.remove(previous)
+                        fringe.append(child)
 
                 if child not in fringe:
-                    fringe.add(child)
+                    # fringe.add(child)
+                    fringe.append(child)
 
-            visited.add(curr_state)
+            # visited.add(curr_state)
+            visited.append(curr_state)
+
+            fringe.sort(reverse=False, key=lambda state: state.f)
 
         return None
 
