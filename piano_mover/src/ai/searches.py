@@ -66,7 +66,8 @@ class A_Star(SearchAlgorithm):
                     previous = get_state_from_set(fringe, child)
                     # if previous state is better, continue
                     # else, substitute child's state
-                    if previous.g <= child.g:
+                    # if previous.g <= child.g:
+                    if previous.f <= child.f:
                         continue
                     else:
                         fringe = fringe - set([previous])
