@@ -22,3 +22,13 @@ def get_state_from_set(set_of_states, state):
         if node == state:
             return node
     return None
+
+
+def get_min(set_of_states):
+    # min_f = min(set_of_states, key=lambda state: state.f).f
+    # res = set([])
+    # for state in set_of_states:
+    #    if state.f == min_f:
+    #        res.add(state)
+    # return min(res, key=lambda state: state.h)
+    return min(set_of_states, key=lambda state: state.f + state.h)

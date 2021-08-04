@@ -1,4 +1,4 @@
-from .utils import backpath, print_state_online, get_state_from_set
+from .utils import backpath, print_state_online, get_state_from_set, get_min
 import game
 
 
@@ -28,6 +28,8 @@ class A_Star(SearchAlgorithm):
     # this is a possible implementation of the A* algorithm
     # return: path from init_state to victory_state
     def search(self, initial_state=None):
+        self.game.assign_scores(initial_state, None)
+
         fringe = set([])
         visited = set([])
 
@@ -35,7 +37,8 @@ class A_Star(SearchAlgorithm):
         while len(fringe) > 0:
             # get current node
             # TODO: ties
-            curr_state = min(fringe, key=lambda state: state.f)
+            # curr_state = min(fringe, key=lambda state: state.f)
+            curr_state = get_min(fringe)
             # remove current node from fringe
             fringe = fringe - set([curr_state])
 
