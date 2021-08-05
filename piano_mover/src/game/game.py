@@ -2,7 +2,7 @@ from .state import PianoMoverState
 
 
 class Game:
-    def __init__(self, heuristic=None, g_valuation=None, f_valuation=None):
+    def __init__(self, heuristic=None, f_valuation=None):
         pass
 
     def neighbors(self, state):
@@ -10,17 +10,14 @@ class Game:
 
 
 class PianoMoverGame(Game):
-    def __init__(self, heuristic=None, g_valuation=None, f_valuation=None):
-        self.H = heuristic
-        self.G = g_valuation
+    def __init__(self, heuristic=None, f_valuation=None):
+        self.H = heuristic.H
+        self.G = heuristic.G
         self.F = f_valuation
 
     def neighbors(self, state):
-        if state.f is None:
-            # initial state
-            self.assign_scores(state, None)
+        children = set([])
 
-        children = []
         # perform all possible moves
         moves = []
         for block in state.representation.blocks:
@@ -29,13 +26,15 @@ class PianoMoverGame(Game):
                 moves.append(state.representation.blocks[block].move_down())
                 moves.append(state.representation.blocks[block].move_left())
                 moves.append(state.representation.blocks[block].move_right())
+
         for move in moves:
             if move is not None:
+                # we create ammissible states
                 child = PianoMoverState(parent=state, representation=move)
                 self.assign_scores(child, state)
-                children.append(child)
+                children.add(child)
 
-        return set(children)
+        return children
 
     def assign_scores(self, curr_state, parent_state):
         curr_state.h = self.H(curr_state)

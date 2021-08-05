@@ -3,35 +3,32 @@ import game
 
 
 class SearchAlgorithm:
-    def __init__(self, heuristic=None):
+    def __init__(self, heuristic=None, game=None):
         pass
 
     def search(self, initial_state=None):
         return None
-
-    def G(self, curr_state=None, parent_state=None):
-        return 0
 
     def F(self, g=0, h=0.0):
         return 0
 
 
 class A_Star(SearchAlgorithm):
-    def __init__(self, heuristic=None):
-        self.game = game.PianoMoverGame(
-            heuristic=heuristic.H, g_valuation=self.G, f_valuation=self.F
-        )
+    def __init__(self, heuristic=None, game=None):
+        self.game = game(heuristic=heuristic, f_valuation=self.F)
 
+    # this is a possible implementation of the A* algorithm
     # the chosen state is the state (never visited before) that minimizes f(n) = g(n) + h(n)
     # g(n): distance from initial state (root) to n
-    # h(n): distance from n to goal state (Manhattan distance)
-    # this is a possible implementation of the A* algorithm
+    # h(n): distance from n to goal state (heuristic)
+    #
     # return: path from init_state to victory_state
     def search(self, initial_state=None):
-        self.game.assign_scores(initial_state, None)
-
         fringe = set([])
         visited = set([])
+
+        # assign score to initial state before start
+        self.game.assign_scores(initial_state, None)
 
         fringe.add(initial_state)
         while len(fringe) > 0:
@@ -79,23 +76,8 @@ class A_Star(SearchAlgorithm):
 
         return None
 
-    # cost of single move
-    def G(self, curr_state=None, parent_state=None):
-        # if curr_state is initial state
-        if parent_state is None:
-            return 0
-
-        if curr_state.representation.moved_block == "piano":
-            # if we moved the piano, cost of move is 1
-            # return parent_state.g + 1
-            return parent_state.g + 4
-        else:
-            # if we moved the obstacles, cost of move is 2
-            # return parent_state.g + 2
-            return parent_state.g + 6
-
-    # f valuation
-    # f = g + h
+    # f valuation logic
+    # f(n) = g(n) + h(n)
     def F(self, g=0, h=0.0):
         f = g + h
         return f

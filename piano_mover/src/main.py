@@ -8,9 +8,12 @@ from ai import A_Star
 
 
 def main():
+    # choose heuristic
     heuristic = ManhattanDistance
+    # choose search algorithm
     search_algorithm = A_Star
 
+    # run the game
     piano_mover.run(heuristic=heuristic, search_algorithm=search_algorithm)
 
 

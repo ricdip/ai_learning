@@ -1,4 +1,4 @@
-from game import PianoMoverState
+from game import PianoMoverState, PianoMoverGame
 from ai import ManhattanDistance, A_Star
 import sys
 
@@ -14,8 +14,8 @@ def run(heuristic=None, search_algorithm=None):
     if search_algorithm is None:
         search_algorithm = A_star
 
-    # instantiate search algorithm
-    search_algorithm = search_algorithm(heuristic=heuristic)
+    # instantiate search algorithm for PianoMoverGame using given heuristic
+    search_algorithm = search_algorithm(heuristic=heuristic, game=PianoMoverGame)
     search_algorithm_name = type(search_algorithm).__name__
 
     print()
