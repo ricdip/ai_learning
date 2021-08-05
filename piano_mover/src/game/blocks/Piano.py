@@ -99,6 +99,7 @@ class Piano:
                 dim=self.repr.dim, blocks=new_blocks
             )
             new_repr.update_block(Piano(self.id, new_repr, new_pos))
+            new_repr.moved_block = "piano"
 
             return new_repr
         return None

@@ -20,6 +20,8 @@ class PianoMoverRepresentation(Representation):
             self.blocks = blocks
             self.update_grid()
 
+        self.moved_block = None
+
     def __eq__(self, other):
         if not isinstance(other, PianoMoverRepresentation):
             return False

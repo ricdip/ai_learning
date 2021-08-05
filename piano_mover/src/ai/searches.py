@@ -36,7 +36,6 @@ class A_Star(SearchAlgorithm):
         fringe.add(initial_state)
         while len(fringe) > 0:
             # get current node
-            # TODO: ties
             # curr_state = min(fringe, key=lambda state: state.f)
             curr_state = get_min(fringe)
             # remove current node from fringe
@@ -80,18 +79,22 @@ class A_Star(SearchAlgorithm):
 
         return None
 
-    # curr.g = parent.g + 1
-    # def G(self, curr_state=None, parent_state=None):
-    #    if parent_state is None:
-    #        return 0
-    #    return parent_state.g + 1
-
-    # curr.g = parent.g + 1
+    # cost of single move
     def G(self, curr_state=None, parent_state=None):
+        # if curr_state is initial state
         if parent_state is None:
             return 0
-        return parent_state.g + 1
 
+        if curr_state.representation.moved_block == "piano":
+            # if we moved the piano, cost of move is 1
+            # return parent_state.g + 1
+            return parent_state.g + 4
+        else:
+            # if we moved the obstacles, cost of move is 2
+            # return parent_state.g + 2
+            return parent_state.g + 6
+
+    # f valuation
     # f = g + h
     def F(self, g=0, h=0.0):
         f = g + h

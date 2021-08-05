@@ -71,6 +71,7 @@ class Block_2:
                 dim=self.repr.dim, blocks=new_blocks
             )
             new_repr.update_block(Block_2(self.id, new_repr, new_pos))
+            new_repr.moved_block = "block_2"
 
             return new_repr
         return None

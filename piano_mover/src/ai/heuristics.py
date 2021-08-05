@@ -23,3 +23,16 @@ class ManhattanDistance(Heuristic):
             )
 
         return distance
+
+
+# we try to consider only the heads positions
+class ManhattanDistanceVariant(Heuristic):
+    def H(self, state):
+        piano_head_x = state.representation.blocks["piano"].head_x
+        piano_head_y = state.representation.blocks["piano"].head_y
+        exit_head_x = state.representation.blocks["exit"].head_x
+        exit_head_y = state.representation.blocks["exit"].head_y
+
+        return math.fabs(piano_head_x - exit_head_x) + math.fabs(
+            piano_head_y - exit_head_y
+        )
