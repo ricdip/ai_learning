@@ -1,5 +1,4 @@
 from .utils import backpath, print_state_online, get_state_from_set, get_min
-import game
 
 
 class SearchAlgorithm:
@@ -15,7 +14,8 @@ class SearchAlgorithm:
 
 class A_Star(SearchAlgorithm):
     def __init__(self, heuristic=None, game=None):
-        self.game = game(heuristic=heuristic, f_valuation=self.F)
+        self.heuristic = heuristic
+        self.game = game
 
     # this is a possible implementation of the A* algorithm
     # the chosen state is the state (never visited before) that minimizes f(n) = g(n) + h(n)
@@ -27,13 +27,14 @@ class A_Star(SearchAlgorithm):
         fringe = set([])
         visited = set([])
 
-        # assign score to initial state before start
-        self.game.assign_scores(initial_state, None)
+        # assign scores to initial state before starting
+        initial_state.g = self.heuristic.G(initial_state, None)
+        initial_state.h = self.heuristic.H(initial_state)
+        initial_state.f = self.F(initial_state.g, initial_state.h)
 
         fringe.add(initial_state)
         while len(fringe) > 0:
             # get current node
-            # curr_state = min(fringe, key=lambda state: state.f)
             curr_state = get_min(fringe)
             # remove current node from fringe
             fringe = fringe - set([curr_state])
@@ -54,6 +55,11 @@ class A_Star(SearchAlgorithm):
                 # if child is already in visited, continue
                 if child in visited:
                     continue
+
+                # assign scores to child
+                child.g = self.heuristic.G(child, curr_state)
+                child.h = self.heuristic.H(child)
+                child.f = self.F(child.g, child.h)
 
                 # if child is already in fringe (state generated previously)
                 if child in fringe:
