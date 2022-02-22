@@ -13,4 +13,8 @@ Artificial intelligence study (Univaq course)
 
 - **images**: directory that contains some used images
 
+- **ai.yml**: exported conda environment (created on a Linux machine) used for developing the final homeworks
+
+- **ai_summary.ipynb**: notebook that contains some theory studies
+
 If the .ipynb files cannot be shown, use [nbviewer](https://nbviewer.jupyter.org/).
