@@ -1,0 +1,4 @@
+Agente 1,Agente 1,Agente 1,Agente 2,Agente 2,Agente 2,tempo esecuzione totale (sec),algorithm
+stati valutati,potature effettuate,tempo azione medio (sec),stati valutati,potature effettuate,tempo azione medio (sec),,
+92223,4376,2.751096458435059,9809,465,0.2667045791943868,75.18045663833618,MinMax Alpha-Beta
+1062556,0,21.118420906066895,18984,0,0.3777063488960266,537.0277581214905,MinMax
