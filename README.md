@@ -11,4 +11,6 @@ Artificial intelligence study (Univaq course)
 
 - **tic_tac_toe**: directory that contains an early development of the tic-tac-toe problem
 
+- **images**: directory that contains some used images
+
 If the .ipynb files cannot be shown, use [nbviewer](https://nbviewer.jupyter.org/).
